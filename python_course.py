@@ -1,3 +1,49 @@
-a = 1
-b = 2
-print(a+b)
+import sqlite3 as lite
+
+
+# Functionality Here
+class DatabaseManagement(object):
+
+    def __init__(self):
+        global dbconn
+        try:
+            dbconn = lite.connect('courses.db')
+            with dbconn:
+                cursor = dbconn.cursor()
+                create_table_query = 'CREATE TABLE IF NOT EXISTS course(Id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, description TEXT, price TEXT, is_private BOOLEAN NOT NULL DEFAULT 1)'
+                cursor.execute(create_table_query)
+        except Exception:
+            print('Unable to create Database !')
+
+    def insert_data(self, data):
+        try:
+            with dbconn:
+                cursor = dbconn.cursor()
+                insert_query = 'INSERT INTO course(name, description, price, is_private) VALUES (?,?,?,?)'
+                cursor.execute(insert_query, data)
+        except Exception:
+            print('Unable to insert data')
+            return False
+
+    def fetch_data(self):
+        try:
+            with dbconn:
+                cursor = dbconn.cursor()
+                fetch_query = 'SELECT * FROM courses'
+                cursor.execute(fetch_query)
+                return cursor.fetchall()
+        except Exception:
+            print('Unable to fetch the data')
+            return False
+
+    def delete_data(self, id):
+        try:
+            with dbconn:
+                cursor = dbconn.cursor()
+                delete_query = 'DELETE FROM course WHERE id = ?'
+                cursor.execute(delete_query, [id])
+        except Exception:
+            print('Unable to delete the data with id: ' + id)
+            return False
+
+# User Interface Here
