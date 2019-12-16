@@ -7,4 +7,6 @@
 ### Steps to run locally
 - Clone the project.
 - Make sure python ver. 3 is installed in your system.
-- Run command `python manage_course.py`
+- Run command:
+  - For Windows `python manage_course.py`
+  - For Linux/ Mac `python3 manage_course.py`
