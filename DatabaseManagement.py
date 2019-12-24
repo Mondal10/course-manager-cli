@@ -11,7 +11,7 @@ class DatabaseOperations(object):
             dbconn = lite.connect('./database/courses.db')
             with dbconn:
                 cursor = dbconn.cursor()
-                create_table_query = 'CREATE TABLE IF NOT EXISTS course(Id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, description TEXT, price TEXT, is_private BOOLEAN NOT NULL DEFAULT 1)'
+                create_table_query = 'CREATE TABLE IF NOT EXISTS course(Id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, description TEXT, price TEXT, is_private Text)'
                 cursor.execute(create_table_query)
         except Exception:
             print('Unable to create Database !')

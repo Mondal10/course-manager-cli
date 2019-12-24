@@ -1,4 +1,5 @@
 from DatabaseManagement import DatabaseOperations
+from reporting import generate_report
 # User Interface Here
 
 
@@ -20,6 +21,7 @@ def create():
         print('Press 1 to Insert a new course\n')
         print('Press 2 to Show all courses\n')
         print('Press 3 to Delete a course with ID\n')
+        print('Press 4 to Import data as CSV file\n')
 
         print('_' * 40)
         print('\n')
@@ -30,7 +32,7 @@ def create():
             name = input('\n Enter a name: ')
             description = input('\n Enter a description: ')
             price = input('\n Enter a price: ')
-            is_private = input('\n Is this course private (0/1): ')
+            is_private = input('\n Is this course private (Yes/No): ')
 
             if db.insert_data([name, description, price, is_private]):
                 print('\n Course was inserted successfully')
@@ -48,9 +50,10 @@ def create():
                 print('\n Course Name: ' + str(course[1]))
                 print('\n Course Description: ' + str(course[2]))
                 print('\n Course Price: ' + str(course[3]))
+                print('\n Is Course Private: ' + str(course[4]))
 
-                private = 'Yes' if course[4] else 'No'
-                print('\n Is Course Private: ' + private)
+                # private = 'Yes' if course[4] else 'No'
+                # print('\n Is Course Private: ' + private)
                 print('_' * 40)
 
         elif choice == '3':
@@ -60,6 +63,13 @@ def create():
                 print('Course was deleted with ID ' + delete_id)
             else:
                 print('Could not delete the course with ID ' + delete_id)
+
+        elif choice == '4':
+            print(':::::Importing data to CSV:::::')
+            data = db.fetch_data()
+            generate_report(data)
+            print(':::::CSV file created with existing data:::::')
+            break
 
         elif choice == '0':
             print(':::::EXITING:::::')
