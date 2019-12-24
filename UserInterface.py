@@ -51,9 +51,6 @@ def create():
                 print('\n Course Description: ' + str(course[2]))
                 print('\n Course Price: ' + str(course[3]))
                 print('\n Is Course Private: ' + str(course[4]))
-
-                # private = 'Yes' if course[4] else 'No'
-                # print('\n Is Course Private: ' + private)
                 print('_' * 40)
 
         elif choice == '3':
